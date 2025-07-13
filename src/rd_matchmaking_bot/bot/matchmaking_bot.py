@@ -4,10 +4,10 @@ import rd_matchmaking_bot.utils.data as data
 
 
 class MatchmakingBot(Bot):
-    def __init__(self):
+    def __init__(self, *cogs: str):
         super().__init__()
 
-        self.load_cogs()
+        self.load_cogs(*cogs)
 
         self.__users = []
         self.__saves = {}
@@ -15,9 +15,9 @@ class MatchmakingBot(Bot):
         self.load_data()
 
 
-    def load_cogs(self, *cogs) -> None:
+    def load_cogs(self, *cogs: str) -> None:
         for cog in cogs:
-            self.load_extension(f"cogs.{cog}")
+            self.load_extension(f"rd_matchmaking_bot.bot.cogs.{cog}")
 
 
     def load_data(self):
