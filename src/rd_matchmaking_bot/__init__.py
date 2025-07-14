@@ -3,7 +3,7 @@ import rd_matchmaking_bot.utils.data as data
 
 
 cogs = (
-    "" # Cogs go here
+    "user_commands"
 )
 
 if __name__ == "__main__":
