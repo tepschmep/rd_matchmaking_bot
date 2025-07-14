@@ -29,6 +29,13 @@ class MatchmakingBot(Bot):
         lobbies_contents = data.read_file(path, "lobbies.json")
         self.lobby_dict = {name: Lobby.from_dict(name, lobby) for name, lobby in lobbies_contents.items()}
 
+        # Adding throwaway player data back into lobbies
+        for user in self.user_dict.values():
+            name = user.current_lobby
+
+            if user.in_lobby(name):
+                self.lobby_dict[name].add_player(user)
+
         self.save_dict = data.read_file(path, "rdsaves.json")
 
 
@@ -55,6 +62,7 @@ class MatchmakingBot(Bot):
             self.user_dict[uid] = User(uid)
 
         return uid
+
 
     async def on_ready(self):
         print(f"{self.user.name} is alive!")
