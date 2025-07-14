@@ -11,3 +11,10 @@ class User(DictEntry):
     players_beaten: list[str] = field(default_factory=list)
 
     current_lobby: str = None
+
+
+    def in_lobby(self, lobby_name: str = None):
+
+        return (self.current_lobby is not None
+                if lobby_name is None else
+                self.current_lobby == lobby_name)
